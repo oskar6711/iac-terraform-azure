@@ -1,0 +1,5 @@
+azure-functions/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.55.0/windows_amd64/terraform-provider-azurerm_v3.55.0_x5.exe
+azure-functions/terraform.exe
+azure-functions/terraform.tfstate
+azure-functions/.terraform.tfstate.lock.info
+azure-functions/terraform.tfstate.backup
