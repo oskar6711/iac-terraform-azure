@@ -1,28 +1,28 @@
 resource "azurerm_resource_group" "azrm-rg" {
-  name     = "azrm-resource-group"
-  location = "Poland Central"
+  name     = var.resource_group_name
+  location = var.resource_group_location
 }
 
 resource "azurerm_storage_account" "azrm-sa" {
-  name                     = "azrmstorageaccount"
+  name                     = var.storage_account_name
   location                 = azurerm_resource_group.azrm-rg.location
   resource_group_name      = azurerm_resource_group.azrm-rg.name
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+  account_tier             = var.tier
+  account_replication_type = var.replication_type
 }
 
 resource "azurerm_app_service_plan" "azrm-asp" {
-  name                = "azrm-app-service-plan"
+  name                = var.app_service_plan_name
   location            = azurerm_resource_group.azrm-rg.location
   resource_group_name = azurerm_resource_group.azrm-rg.name
   sku {
-    tier = "Standard"
-    size = "S1"
+    tier = var.tier
+    size = var.size
   }
 }
 
 resource "azurerm_linux_function_app" "azrm-lfa" {
-  name                       = "azrm-linux-function-app"
+  name                       = var.linux_function_app_name
   location                   = azurerm_resource_group.azrm-rg.location
   resource_group_name        = azurerm_resource_group.azrm-rg.name
   storage_account_name       = azurerm_storage_account.azrm-sa.name
@@ -32,25 +32,7 @@ resource "azurerm_linux_function_app" "azrm-lfa" {
 }
 
 resource "azurerm_function_app_function" "azrm-faf" {
-  name            = "azrm-function-app-function"
+  name            = var.function_app_function_name
   function_app_id = azurerm_linux_function_app.azrm-lfa.id
-  config_json = jsonencode({
-    "bindings" = [
-      {
-        "authLevel" = "function"
-        "direction" = "in"
-        "methods" = [
-          "get",
-          "post",
-        ]
-        "name" = "req"
-        "type" = "httpTrigger"
-      },
-      {
-        "direction" = "out"
-        "name"      = "$return"
-        "type"      = "http"
-      },
-    ]
-  })
+  config_json     = jsonencode(var.function_app_function_config)
 }
