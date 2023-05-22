@@ -10,7 +10,7 @@ variable "resource_group_location" {
 
 variable "storage_account_name" {
   type    = string
-  default = "afstorageaccount"
+  default = "afstoragewsb"
 }
 
 variable "tier" {
