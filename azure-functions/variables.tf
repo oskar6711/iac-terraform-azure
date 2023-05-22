@@ -1,6 +1,6 @@
 variable "resource_group_name" {
   type    = string
-  default = "azrm-resource-group"
+  default = "af-resource-group"
 }
 
 variable "resource_group_location" {
@@ -10,7 +10,7 @@ variable "resource_group_location" {
 
 variable "storage_account_name" {
   type    = string
-  default = "azrmstorageaccount"
+  default = "afstorageaccount"
 }
 
 variable "tier" {
@@ -25,7 +25,7 @@ variable "replication_type" {
 
 variable "app_service_plan_name" {
   type    = string
-  default = "azrm-app-service-plan"
+  default = "af-app-service-plan"
 }
 
 variable "size" {
@@ -35,12 +35,12 @@ variable "size" {
 
 variable "linux_function_app_name" {
   type    = string
-  default = "azrm-linux-function-app"
+  default = "af-linux-function-app"
 }
 
 variable "function_app_function_name" {
   type    = string
-  default = "azrm-function-app-function"
+  default = "af-function-app-function"
 }
 
 variable "function_app_function_config" {
